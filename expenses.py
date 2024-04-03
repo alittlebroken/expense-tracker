@@ -2,7 +2,6 @@ from src.Account import Account
 
 # TODO: Set selected_account to display name & balance not index
 # TODO: Place space after account list when selecting an account
-# TODO: List of accounts should also show balance
 
 # List for customer accounts
 accounts = []
@@ -90,7 +89,7 @@ def list_accounts():
 
     if len(accounts) > 0:
         for idx, account in enumerate(accounts):
-            print("{}. {}".format(idx, account.name))
+            print("{}. {} - £{}".format(idx, account.name, account.balance))
     else:
         print("Currently you have no accounts")
         print("\n")
