@@ -33,5 +33,33 @@ class Account:
                 transaction.category
             ))
 
+    """show_filtered_transactions
+
+    Displays transactions that belong to a certain category
     
+    Keyword arguments: None
+    Return: Nothing
+    """
+    def show_filtered_transactions(self):
+        
+        # Display list of categories
+        catCount = 0
+        for cat in self.categories:
+            print("{}. {}".format(catCount, cat["name"]))
+            catCount += 1
+
+        choice = ""
+        while True:
+            try:
+                choice = str(input("Please enter in the category name: "))
+                break
+            except:
+                print("Invalid category name")
+
+        
+        print("Transactions filtered by {}".format(choice))
+        for trans in self.transactions:
+            if trans["category"] == choice:
+                print("{} - £{}".format(trans["name"], trans["amount"]))
+                
     
