@@ -104,5 +104,50 @@ class Account:
 
         # Finally ad the transaction
         self.transactions.append(Expense(name, amount, category, trans_type))
-                
+
+    """remove_transaction
+    
+    Keyword arguments: None
+    
+    Return: None
+    """
+    def remove_transaction(self):
+
+        # prompt the user if they wish to see all transaction or select a category?
+        choice = None
+        while choice == None:
+            try:
+                print("Type ALL for all transactions or FILTER to apply a filter: ")
+                choice = str(input("> "))
+            except Exception:
+                choice = None
+
+        if(choice == "All"):
+            self.show_all_transactions()
+        else:
+            cat = None
+            while cat == None:
+                try:
+                    cat = str(input("Category to filter by: "))
+                except Exception:
+                    cat = None
+
+            # Filter the transactions
+            print("Showing transactions filtered by: {}".format(cat))
+            for idx, trans in enumerate(self.transactions):
+                if(trans["category"] == cat):
+                    print("{}. {} - £{} - {}".format(idx, trans["name"], trans["amount"], trans["category"]))
+
+        # Prompt the user for the ID of the transaction to be affected
+        choice = None
+        while choice == None or choice.isdigit() != False:
+            try: 
+                choice = int(input("Enter the id of the transaction to remove: "))
+            except Exception:
+                choice = None
+
+        # Now remove the selected transaction
+        self.transactions.remove(choice)
+
+
     
