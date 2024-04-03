@@ -3,6 +3,9 @@ from src.Account import Account
 # List for customer accounts
 accounts = []
 
+# The current active account being worked on
+selected_account = None
+
 # Create an list of the users current expenses
 expenses = []
 
@@ -26,9 +29,13 @@ def show_menu(app_title):
         print(app_title)
         print("-" * len(app_title))
 
+        print("\n")
+        print("Current active account: {}".format(selected_account))
+        print("\n")
+
         print("Choose an option from below:\n")
         
-        print("Accounts:")
+        print("Accounts [{}]:".format(len(accounts)))
         print("1. List")
         print("2. Select")
         print("3. New")
@@ -73,4 +80,4 @@ run the application
 """
 if __name__ == "__main__":
 
-    show_menu("Python Budgeter")
+    show_menu("My Finances")
