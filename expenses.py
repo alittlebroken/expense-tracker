@@ -15,7 +15,7 @@ Displays the applications main menu
 Keyword arguments: None
 Return: None
 """
-def show_menu(app_title):
+def show_menu():
 
     # Controls the while loop so we can end the program
     # if need be
@@ -23,11 +23,6 @@ def show_menu(app_title):
     
     # Run the program until the user decides to quit
     while running:
-
-        print("\n")
-        print("-" * len(app_title))
-        print(app_title)
-        print("-" * len(app_title))
 
         print("\n")
         print("Current active account: {}".format(selected_account))
@@ -101,4 +96,10 @@ run the application
 """
 if __name__ == "__main__":
 
-    show_menu("My Finances")
+    app_title = "Expense Tracker"
+    print("\n")
+    print("-" * len(app_title))
+    print(app_title)
+    print("-" * len(app_title))
+
+    show_menu()
