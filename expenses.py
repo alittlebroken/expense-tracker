@@ -17,6 +17,8 @@ Return: None
 """
 def show_menu():
 
+    global accounts, selected_account
+
     # Controls the while loop so we can end the program
     # if need be
     running = True
@@ -125,6 +127,8 @@ Return: None
 """
 def new_account():
     
+    global accounts, selected_account
+
     name = None
     while name == None:
         try:
@@ -140,6 +144,10 @@ def new_account():
             balance = None
 
     accounts.append(Account(name, balance))
+    # Get the id of the last added account
+    account_id = len(accounts) - 1
+    selected_account = int(account_id)
+    
     print("Account added")
 
 
