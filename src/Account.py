@@ -128,6 +128,9 @@ class Account:
         # Finally ad the transaction
         self.transactions.append(Expense(name, amount, category, trans_type))
 
+        # Show current transactions
+        self.show_all_transactions()
+
     """remove_transaction
     
     Keyword arguments: None
