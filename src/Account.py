@@ -101,7 +101,7 @@ class Account:
                 name = None
         
         amount = None
-        while amount == None or amount.isfloat() == False:
+        while amount == None or isinstance(amount, float) == False:
             try:
                 amount = float(input("Amount of the transaction: "))
             except Exception:
@@ -115,9 +115,13 @@ class Account:
                 category = None
 
         trans_type = None
-        while trans_type == None or (trans_type != "CREDIT" or trans_type != "DEBIT"):
+        while trans_type == None:
             try:
                 trans_type = str(input("Type of transaction [CREDIT/DEBIT]: "))
+                if trans_type == "DEBIT" or trans_type == "CREDIT":
+                    pass
+                else:
+                    trans_type = None
             except Exception:
                 trans_type = None
 
