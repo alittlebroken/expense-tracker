@@ -54,7 +54,7 @@ def show_menu():
             case 2:
                 select_account()
             case 3:
-                pass
+                new_account()
             case 4:
                 pass
             case 5:
@@ -86,7 +86,7 @@ def list_accounts():
 
     if len(accounts) > 0:
         for idx, account in enumerate(accounts):
-            print("{}. {}".format(idx, account[idx].name))
+            print("{}. {}".format(idx, account.name))
     else:
         print("Currently you have no accounts")
         print("\n")
@@ -101,17 +101,46 @@ Return: None
 """
 def select_account():
     list_accounts()
-
+    global selected_account
     if(len(accounts) > 0):
 
         choice = None
-        while choice == None or choice.isdigit() != False:
+        while choice == None or isinstance(choice, int) == False:
             try:
                 choice = int(input("Please enter in the account number: "))
             except Exception:
                 choice = None
     
         selected_account = int(choice)
+
+
+"""new_account
+
+Creates a new account
+
+Keyword arguments:
+None
+Return: None
+"""
+def new_account():
+    
+    name = None
+    while name == None:
+        try:
+            name = str(input("Enter new account name: "))
+        except Exception:
+            name = None
+    
+    balance = None
+    while balance == None:
+        try:
+            balance = float(input("Please ener in the opening balance: "))
+        except Exception:
+            balance = None
+
+    accounts.append(Account(name, balance))
+    print("Account added")
+
 
 
 
