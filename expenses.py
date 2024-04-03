@@ -3,7 +3,6 @@ from src.Account import Account
 # TODO: Set selected_account to display name & balance not index
 # TODO: Place space after account list when selecting an account
 # TODO: List of accounts should also show balance
-# TODO: Spelling mistake in add_account
 
 # List for customer accounts
 accounts = []
@@ -139,7 +138,7 @@ def new_account():
     balance = None
     while balance == None:
         try:
-            balance = float(input("Please ener in the opening balance: "))
+            balance = float(input("Please enter in the opening balance: "))
         except Exception:
             balance = None
 
