@@ -1,3 +1,8 @@
+from src.Account import Account
+
+# List for customer accounts
+accounts = []
+
 # Create an list of the users current expenses
 expenses = []
 
@@ -15,6 +20,7 @@ def show_menu():
     
     # Run the program until the user decides to quit
     while running:
+
         print("\n-------------------")
         print("Python Expenses App")
         print("-------------------\n")
@@ -126,4 +132,5 @@ def remove_expense():
 run the application
 """
 if __name__ == "__main__":
+
     show_menu()
