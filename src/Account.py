@@ -14,6 +14,25 @@ class Account:
         self.balance = balance
         self.transactions = []
 
+    """show_summary
+
+    Shows details of n instance of this Account class
+
+    
+    Keyword arguments: None
+    Return: None
+    """
+    def show_summary(self):
+        print("\n")
+        text = "Summary for {} account".format(self.name)
+        print(text)
+        print("-" * len(text))
+        print("\n")
+        print("Balance: £{}".format(self.balance))
+        print("Transactions: {}".format(len(self.transactions)))
+        
+    
+
     """show_all_transactions
 
     Displays the list of transactions this account has
