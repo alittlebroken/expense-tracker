@@ -1,5 +1,10 @@
 from src.Account import Account
 
+# TODO: Set selected_account to display name & balance not index
+# TODO: Place space after account list when selecting an account
+# TODO: List of accounts should also show balance
+# TODO: Spelling mistake in add_account
+
 # List for customer accounts
 accounts = []
 
@@ -56,7 +61,7 @@ def show_menu():
             case 3:
                 new_account()
             case 4:
-                pass
+                remove_account()
             case 5:
                 pass
             case 6:
@@ -141,6 +146,38 @@ def new_account():
     accounts.append(Account(name, balance))
     print("Account added")
 
+
+"""remove_account
+
+Removes the selected account
+
+Keyword arguments:
+None
+Return: None
+"""
+def remove_account():
+    
+    global selected_account
+    global accounts
+
+    if len(accounts) < 1:
+        return
+
+    list_accounts()    
+
+    print("\n")
+
+    choice = None
+    while choice == None or isinstance(choice, int) == False:
+        try:
+            choice = int(input("Please enter the number of the account you wish to remove: "))
+        except Exception:
+            choice = None
+
+    del accounts[choice]
+
+    selected_account = None
+    print("Account removed")
 
 
 
