@@ -1,8 +1,5 @@
 from src.Account import Account
 
-# TODO: Set selected_account to display name & balance not index
-# TODO: Place space after account list when selecting an account
-
 # List for customer accounts
 accounts = []
 
@@ -28,7 +25,7 @@ def show_menu():
     while running:
 
         print("\n")
-        print("Current active account: {}".format(selected_account))
+        print("Selected account: {}".format(get_account_name(selected_account)))
         print("\n")
 
         print("Choose an option from below:\n")
@@ -104,6 +101,7 @@ Return: None
 """
 def select_account():
     list_accounts()
+    print("\n")
     global selected_account
     if(len(accounts) > 0):
 
@@ -177,7 +175,26 @@ def remove_account():
     selected_account = None
     print("Account removed")
 
+"""get_account_name
 
+Based on an index number get the account name that matches
+
+Keyword arguments:
+id -- The id of the account to display
+Return: None
+"""
+def get_account_name(id):
+
+    global accounts, selected_account
+
+    if len(accounts) < 1:
+        return None
+    
+    if isinstance(id, int) != True:
+        return None
+    
+    return "{} [£{}]".format(accounts[id].name, accounts[id].balance)
+    
 
 """
 run the application
