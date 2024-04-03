@@ -44,7 +44,12 @@ class Account:
 
         # Counter for ID of transaction
         counter = 0
-        print("All transactions for account: {}".format(self.name))
+        text = "All transactions for account: {}".format(self.name)
+        print("\n")
+        print("-" * len(text))
+        print(text)
+        print("-" * len(text))
+        print("\n")
         for transaction in self.transactions:
             print("{}. {} - £{} - {}".format(
                 counter,
