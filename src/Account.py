@@ -1,4 +1,4 @@
-from Expense import Expense
+from src.Expense import Expense
 """Account class
 
 Keyword arguments:
