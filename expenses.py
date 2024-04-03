@@ -52,7 +52,7 @@ def show_menu():
             case 1:
                 list_accounts()
             case 2:
-                pass
+                select_account()
             case 3:
                 pass
             case 4:
@@ -90,6 +90,30 @@ def list_accounts():
     else:
         print("Currently you have no accounts")
         print("\n")
+
+"""select_account
+
+Allows the user to select an account to perform actions on
+
+Keyword arguments:
+None
+Return: None
+"""
+def select_account():
+    list_accounts()
+
+    if(len(accounts) > 0):
+
+        choice = None
+        while choice == None or choice.isdigit() != False:
+            try:
+                choice = int(input("Please enter in the account number: "))
+            except Exception:
+                choice = None
+    
+        selected_account = int(choice)
+
+
 
 """
 run the application
