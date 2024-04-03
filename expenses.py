@@ -55,7 +55,7 @@ def show_menu(app_title):
 
         match option:
             case 1:
-                pass
+                list_accounts()
             case 2:
                 pass
             case 3:
@@ -73,7 +73,28 @@ def show_menu(app_title):
             case _:
                 print("Sorry. That option is not recognised. Please try again.")
         
+"""list_accounts
 
+List al accounts for the user running the program
+
+Keyword arguments:
+None
+Return: Nothing
+"""
+def list_accounts():
+    
+    title = "Your account list"
+    print("-" * len(title))
+    print(title)
+    print("-" * len(title))
+    print("\n")
+
+    if len(accounts) > 0:
+        for idx, account in enumerate(accounts):
+            print("{}. {}".format(idx, account[idx].name))
+    else:
+        print("Currently you have no accounts")
+        print("\n")
 
 """
 run the application
