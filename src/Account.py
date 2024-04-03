@@ -1,3 +1,4 @@
+from Expense import Expense
 """Account class
 
 Keyword arguments:
@@ -61,5 +62,47 @@ class Account:
         for trans in self.transactions:
             if trans["category"] == choice:
                 print("{} - £{}".format(trans["name"], trans["amount"]))
+
+
+    """add_transaction
+
+    Adds a new transaction to this account
+    
+    Keyword arguments: None
+    Return: Nothing
+    """
+    def add_transaction(self):
+        print("Add new transaction for account: {}".format(self.name))
+
+        name = None
+        while name == None:
+            try:
+                name = str(input("Name of the transaction: "))
+            except Exception:
+                name = None
+        
+        amount = None
+        while amount == None or amount.isfloat() == False:
+            try:
+                amount = float(input("Amount of the transaction: "))
+            except Exception:
+                amount = None
+
+        category = None
+        while category == None:
+            try:
+                category = str(input("Category of the transaction: "))
+            except Exception:
+                category = None
+
+        trans_type = None
+        while trans_type == None or (trans_type != "CREDIT" or trans_type != "DEBIT"):
+            try:
+                trans_type = str(input("Type of transaction [CREDIT/DEBIT]: "))
+            except Exception:
+                trans_type = None
+
+        # Finally ad the transaction
+        self.transactions.append(Expense(name, amount, category, trans_type))
                 
     
