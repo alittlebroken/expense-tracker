@@ -130,7 +130,7 @@ class Account:
             except Exception:
                 trans_type = None
 
-        # Finally ad the transaction
+        # Finally add the transaction
         self.transactions.append(Expense(name, amount, category, trans_type))
 
         # Show current transactions
