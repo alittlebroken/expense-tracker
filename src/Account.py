@@ -183,8 +183,18 @@ class Account:
             except Exception:
                 choice = None
 
+        # Update the balance
+        trans_type = self.transactions[choice].trans_type
+        trans_amount = self.transactions[choice].amount
+
+        if trans_type == "CREDIT":
+            self.balance -= float(trans_amount)
+        elif trans_type == "DEBIT":
+            self.balance += float(trans_amount)
+
         # Now remove the selected transaction
         self.transactions.remove(choice)
+
 
 
     
