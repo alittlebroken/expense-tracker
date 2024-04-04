@@ -159,7 +159,7 @@ class Account:
             except Exception:
                 choice = None
 
-        if(choice == "All"):
+        if choice == "ALL":
             self.show_all_transactions()
         else:
             cat = None
@@ -172,19 +172,19 @@ class Account:
             # Filter the transactions
             print("Showing transactions filtered by: {}".format(cat))
             for idx, trans in enumerate(self.transactions):
-                if(trans["category"] == cat):
-                    print("{}. {} - £{} - {}".format(idx, trans["name"], trans["amount"], trans["category"]))
+                if(trans.category == cat):
+                    print("{}. {} - £{} - {}".format(idx, trans.name, trans.amount, trans.category))
 
         # Prompt the user for the ID of the transaction to be affected
         choice = None
-        while choice == None or choice.isdigit() != False:
+        while choice == None or isinstance(choice, int) == False:
             try: 
                 choice = int(input("Enter the id of the transaction to remove: "))
             except Exception:
                 choice = None
 
         # Update the balance
-        trans_type = self.transactions[choice].trans_type
+        trans_type = self.transactions[choice].type
         trans_amount = self.transactions[choice].amount
 
         if trans_type == "CREDIT":
@@ -193,7 +193,7 @@ class Account:
             self.balance += float(trans_amount)
 
         # Now remove the selected transaction
-        self.transactions.remove(choice)
+        del self.transactions[choice]
 
 
 
