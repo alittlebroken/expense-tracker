@@ -63,9 +63,11 @@ def show_menu():
                 if selected_account != None:
                     accounts[selected_account].show_all_transactions()
             case 6:
-                pass
+                if selected_account != None:
+                    accounts[selected_account].add_transaction()
             case 7:
-                pass
+                if selected_account != None:
+                    accounts[selected_account].remove_transaction()
             case 8:
                 running = False
             case _:
