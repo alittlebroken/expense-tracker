@@ -133,6 +133,12 @@ class Account:
         # Finally add the transaction
         self.transactions.append(Expense(name, amount, category, trans_type))
 
+        # Update the balance based on if the transaction is a DEBIT or CREDIT
+        if trans_type == "CREDIT":
+            self.balance += float(amount)
+        elif trans_type == "DEBIT":
+            self.balance -= float(amount)
+
         # Show current transactions
         self.show_all_transactions()
 
