@@ -1,3 +1,11 @@
+from src.Account import Account
+
+# List for customer accounts
+accounts = []
+
+# The current active account being worked on
+selected_account = None
+
 # Create an list of the users current expenses
 expenses = []
 
@@ -9,121 +17,205 @@ Return: None
 """
 def show_menu():
 
+    global accounts, selected_account
+
     # Controls the while loop so we can end the program
     # if need be
     running = True
     
     # Run the program until the user decides to quit
     while running:
-        print("\n-------------------")
-        print("Python Expenses App")
-        print("-------------------\n")
-        print("You can perform the following:\n")
-        print("1. Add expense")
-        print("2. Remove expense")
-        print("3. List expenses")
-        print("4. Quit application")
+
+        print("\n")
+        print("Selected account: {}".format(get_account_name(selected_account)))
         print("\n")
 
-        option = input("> ")
-
-        if option == "1":
-            add_expense()
-        elif option == "2":
-            remove_expense()
-        elif option == "3":
-            list_expenses()
-        elif option == "4":
-            running = False
-        else:
-            print("Please try again that option is not recognised")
-    
-    print("\nThank you for using the Python expenses app")
+        print("Choose an option from below:\n")
         
+        print("Accounts [{}]:".format(len(accounts)))
+        print("1. List")
+        print("2. Select")
+        print("3. New")
+        print("4. Remove")
+        print("\n")
 
-"""list_expenses
-List a users current expenses
+        print("Transactions:")
+        print("5. List")
+        print("6. Add")
+        print("7. Remove")
+        print("\n")
+        
+        print("8. Quit application")
+        print("\n")
 
-Keyword arguments: None
-Return: None
+        option = int(input("> "))
+
+        match option:
+            case 1:
+                list_accounts()
+            case 2:
+                select_account()
+            case 3:
+                new_account()
+            case 4:
+                remove_account()
+            case 5:
+                if selected_account != None:
+                    accounts[selected_account].show_all_transactions()
+            case 6:
+                if selected_account != None:
+                    accounts[selected_account].add_transaction()
+            case 7:
+                if selected_account != None:
+                    accounts[selected_account].remove_transaction()
+            case 8:
+                running = False
+            case _:
+                print("Sorry. That option is not recognised. Please try again.")
+        
+"""list_accounts
+
+List al accounts for the user running the program
+
+Keyword arguments:
+None
+Return: Nothing
 """
-def list_expenses():
+def list_accounts():
+    
+    title = "Your account list"
+    print("-" * len(title))
+    print(title)
+    print("-" * len(title))
     print("\n")
-    print("Current expense list")
-    print("--------------------")
-    # Check to see if we actually have any expenses to show
-    if len(expenses) <= 0:
-        print("Currently you have no expenses")
+
+    if len(accounts) > 0:
+        for idx, account in enumerate(accounts):
+            print("{}. {} - £{}".format(idx, account.name, account.balance))
     else:
-        # Counter for the loop
-        count = 0
-        for expense in expenses:
-            print("# {} - £{} - {}".format(count, expense["amount"], expense["category"]))
-            count += 1
+        print("Currently you have no accounts")
+        print("\n")
 
+"""select_account
 
-"""addExpense
-Add an expense dictionary to the expenses list
+Allows the user to select an account to perform actions on
 
-Keyword arguments: None
+Keyword arguments:
+None
 Return: None
 """
-def add_expense():
+def select_account():
+    list_accounts()
+    print("\n")
+    global selected_account
+    if(len(accounts) > 0):
 
-    amount = 0.0
-    category = ""
+        choice = None
+        while choice == None or isinstance(choice, int) == False:
+            try:
+                choice = int(input("Please enter in the account number: "))
+            except Exception:
+                choice = None
+    
+        selected_account = int(choice)
+
+
+"""new_account
+
+Creates a new account
+
+Keyword arguments:
+None
+Return: None
+"""
+def new_account():
+    
+    global accounts, selected_account
+
+    name = None
+    while name == None:
+        try:
+            name = str(input("Enter new account name: "))
+        except Exception:
+            name = None
+    
+    balance = None
+    while balance == None:
+        try:
+            balance = float(input("Please enter in the opening balance: "))
+        except Exception:
+            balance = None
+
+    accounts.append(Account(name, balance))
+    # Get the id of the last added account
+    account_id = len(accounts) - 1
+    selected_account = int(account_id)
+    
+    print("Account added")
+
+
+"""remove_account
+
+Removes the selected account
+
+Keyword arguments:
+None
+Return: None
+"""
+def remove_account():
+    
+    global selected_account
+    global accounts
+
+    if len(accounts) < 1:
+        return
+
+    list_accounts()    
 
     print("\n")
 
-    print("Please enter in the amount of the expense: ")
-    try:
-       while True:
-           amount = float(input("> "))
-           break 
-    except:
-        print("Error: Invalid entry for expense amount")
+    choice = None
+    while choice == None or isinstance(choice, int) == False:
+        try:
+            choice = int(input("Please enter the number of the account you wish to remove: "))
+        except Exception:
+            choice = None
 
-    print("Please enter the category for the expense: ")
-    try:
-        while True:
-            category = str(input("> "))
-            break
-    except:
-        print("Error: Invalid entry for expense category")
+    del accounts[choice]
 
-    # Finally add the expense
-    expenses.append({ "amount": amount, "category": category })
+    selected_account = None
+    print("Account removed")
 
-    # List the updated expense list
-    list_expenses()
+"""get_account_name
 
-"""remove_expense
-Removes the selected expense
+Based on an index number get the account name that matches
 
-Keyword arguments: None
+Keyword arguments:
+id -- The id of the account to display
 Return: None
 """
-def remove_expense():
-    list_expenses()
+def get_account_name(id):
+
+    global accounts, selected_account
+
+    if len(accounts) < 1:
+        return None
     
-    # If no expenses skip the rest of the function
-    if len(expenses) < 1:
-        return
+    if isinstance(id, int) != True:
+        return None
     
-    print("Please enter the number of the expense to remove: ")
-    try:
-        while True:
-            id = int(input("> "))
-            break
-    except:
-        print("Error: Invalid entry for expense id")
+    return "{} [£{}]".format(accounts[id].name, accounts[id].balance)
     
-    # Remove the expense
-    expenses.pop(id)
-    list_expenses()
 
 """
 run the application
 """
 if __name__ == "__main__":
+
+    app_title = "Expense Tracker"
+    print("\n")
+    print("-" * len(app_title))
+    print(app_title)
+    print("-" * len(app_title))
+
     show_menu()
